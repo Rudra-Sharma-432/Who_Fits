@@ -11,68 +11,110 @@
 
 const PHRASE_LIST = [
 
-  /* ── Personality & Behavior ── */
+  /* ── Personality Chaos ── */
   [
-    ["Very funny", "Very calm", "Very confident", "Least confident"],
-    ["Most chaotic", "Most unpredictable", "Most reliable", "Most mysterious"],
-    ["Most dramatic", "Most lazy", "Most hardworking", "Most creative"],
-    ["Most annoying (in a fun way)", "Most serious", "Most talkative", "Most quiet"]
+    ["Accidentally funny", "Laughs at everything", "Laughs at nothing"],
+    ["Calm in chaos", "Panics instantly"],
+    ["Confident for no reason", "Doubts even correct answers"],
+    ["Energy of 100 coffees", "Battery always at 1%"]
   ],
 
-  /* ── Social & Group Dynamics ── */
+  /* ── Social Madness ── */
   [
-    ["Most likely to become a leader", "Most likely to fail as a leader"],
-    ["Most likely to start a fight", "Most likely to end a fight"],
-    ["Most likely to betray the group", "Most loyal"],
-    ["Most likely to be trusted", "Most suspicious"]
+    ["Would start drama for entertainment", "Avoids drama like a ghost"],
+    ["Trustworthy… probably", "Looks guilty even when innocent"],
+    ["Group's unpaid therapist", "Group's biggest problem"],
+    ["Talks non-stop", "Communicates via nods"]
   ],
 
-  /* ── Intelligence & Decisions ── */
+  /* ── Brain & Decisions ── */
   [
-    ["Secretly very smart", "Most likely to overthink"],
-    ["Most likely to make smart decisions", "Most likely to make bad decisions"],
-    ["Best liar", "Worst liar", "Most likely to lie"],
-    ["Most likely to win an argument", "Most likely to lose an argument"]
+    ["Smart but lazy", "Dumb but confident"],
+    ["Overthinks everything", "Thinks nothing"],
+    ["Wins arguments using logic", "Wins arguments by being louder"],
+    ["Would believe anything", "Trusts absolutely no one"]
   ],
 
-  /* ── Daily Life & Habits ── */
+  /* ── Daily Life Struggles ── */
   [
-    ["Most likely to be late", "Most likely to sleep all day"],
-    ["Most likely to forget things", "Most likely to remember everything"],
-    ["Most likely to waste money", "Most likely to save money"],
-    ["Most likely to ignore messages", "Most likely to reply instantly"]
+    ["Always late but chill", "Early and judging everyone"],
+    ["Forgets why they opened the app", "Remembers things from 2012"],
+    ["Spends money like it's fake", "Acts poor with money saved"],
+    ["Replies in 0.2 seconds", "Replies after 3-5 business days"]
   ],
 
-  /* ── Funny & Chaos ── */
+  /* ── Pure Chaos ── */
   [
-    ["Most likely to laugh at the wrong time", "Most likely to laugh at their own joke"],
-    ["Most likely to trip while running", "Most likely to fall for a prank"],
-    ["Most likely to create a prank", "Most likely to get caught doing something stupid"],
-    ["Most likely to do something embarrassing", "Most likely to panic in a crisis"]
+    ["Laughs during serious moments", "Serious during funny moments"],
+    ["Trips on flat ground", "Walks like a final boss"],
+    ["Prank mastermind", "Prank victim"],
+    ["Embarrasses self daily", "Witnesses others' embarrassment"]
   ],
 
-  /* ── Fame & Internet ── */
+  /* ── Internet Energy ── */
   [
-    ["Most likely to become famous", "Most likely to go viral"],
-    ["Most likely to become a YouTuber", "Most likely to become a meme"],
-    ["Most likely to get famous for something random", "Most likely to be cancelled"],
-    ["Most likely to be popular online", "Most likely to be ignored online"]
+    ["Would go viral accidentally", "Tries to go viral and fails"],
+    ["Future meme legend", "Doesn't understand memes"],
+    ["Chronically online", "Still uses internet like it's 2010"],
+    ["Influencer energy", "NPC in comment section"]
   ],
 
-  /* ── Survival & Extreme Situations ── */
+  /* ── Survival Logic ── */
   [
-    ["Most likely to survive a zombie apocalypse", "First to die in a horror movie"],
-    ["Most likely to survive a horror movie", "Most likely to go missing in a horror movie"],
-    ["Most likely to survive alone in a forest", "Most likely to get lost quickly"],
-    ["Most likely to save others", "Most likely to run away first"]
+    ["Survives by skill", "Survives by luck"],
+    ["Runs toward danger", "Hides immediately"],
+    ["Sacrifices self for team", "Uses team as shield"],
+    ["Gets lost in own neighborhood", "Human GPS"]
   ],
 
-  /* ── Vibes & Roles ── */
+  /* ── Weird Vibes ── */
   [
-    ["Main character energy", "Side character energy", "NPC energy"],
-    ["Looks innocent but isn't", "Actually dangerous"],
-    ["Fake cool", "Actually cool"],
-    ["Most likely to be underestimated", "Most likely to surprise everyone"]
+    ["Main character in their head", "Background extra in reality"],
+    ["Looks innocent, plots chaos", "Looks dangerous, is soft"],
+    ["Fake genius energy", "Silent actual genius"],
+    ["Unpredictable NPC", "Scripted dialogue person"]
+  ],
+
+  /* ── Wild & Random ── */
+  [
+    ["Talks to animals like they understand", "Animals avoid them"],
+    ["Would survive on vibes alone", "Needs tutorial for everything"],
+    ["Accidentally starts a cult", "Accidentally join a cult"]
+  ],
+
+  /* ── Dark Humor Lite ── */
+  [
+    ["Can laugh at their own funeral", "Can cry at a meme", "Can get offended by a meme"],
+    ["Would be the main villain origin story", "Would be the sidekick who dies first"],
+    ["Trusts the wrong person every time", "Is the wrong person to trust"],
+    ["Would sell friends for snacks", "Would buy friends snacks"]
+  ],
+
+  /* ── Niche (Rare Drops) ── */
+  [
+    ["Says 'one more game' and plays 5 hours", "Rages but still queues again"],
+    ["Blames lag for everything", "Actually is the lag"],
+    ["Carries the team silently", "Needs carrying but gives advice"],
+    ["Tries hardest, still loses", "Does nothing, still wins"],
+
+    ["Writes code that somehow works", "Breaks things by touching them"],
+    ["Fixes bug by doing nothing", "Creates 5 bugs fixing 1"],
+    ["Says 'it's easy' (and it's never easy)", "Googles everything (and still confused)"],
+
+    ["Future YouTuber energy", "Thinks they are famous already"],
+    ["Records everything, posts nothing", "Posts once, disappears forever"],
+    ["Main character in reels", "Accidentally in the background of reels"]
+  ],
+
+  /* ── Morality & Speech ── */
+  [
+    ["Curses close to none", "Curses in every sentence"],
+    ["Too pure for this world", "Corrupts everyone around them"],
+    ["Follows rules blindly", "Breaks rules for fun"],
+    ["Would return lost money", "Would keep lost money and feel smart"],
+    ["Guilt hits instantly", "Sleeps peacefully after chaos"],
+    ["Apologizes even when right", "Never apologizes when right" ,"Never apologizes even when wrong"],
+    ["Believes in karma", "Thinks consequences are optional (not in karma)"],
+    ["Acts nice, secretly evil", "Looks evil, actually kind", "Looks evil and actually evil", "Looks nice and actually nice"]
   ]
-
 ];
