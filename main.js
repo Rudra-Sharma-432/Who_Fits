@@ -164,8 +164,8 @@ function votedTo(i, room) {
     [currentPlayer]: room.game.playerOrder[i]
   });
 
-  console.log(currentPlayer, room.game.playerOrder[i]);
-  console.log(`Player: ${room.players[currentPlayer].name}, Voted to: ${room.players[room.game.playerOrder[i]].name}`);
+  // console.log(currentPlayer, room.game.playerOrder[i]);
+  // console.log(`Player: ${room.players[currentPlayer].name}, Voted to: ${room.players[room.game.playerOrder[i]].name}`);
 }
 
 // ═══════════════════════════════════════════════════════
@@ -354,6 +354,8 @@ function restartGame() {
     votes: null,
     game: { round: 1 }
   });
+
+  console.log("Game restarted by host. Room reset to lobby state.");
 }
 
 /**

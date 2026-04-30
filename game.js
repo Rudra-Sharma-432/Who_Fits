@@ -114,7 +114,7 @@ function listenToRoom(roomName) {
       }
 
       // ── Game was restarted: send everyone back to lobby ──
-      if (room.state === "lobby" && gameStarted) {
+      if (room.state === "lobby") {
         gameStarted = false;
         gameJoined = false;
         lastShownRound = 0;
