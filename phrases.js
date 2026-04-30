@@ -13,9 +13,9 @@ const PHRASE_LIST = [
 
   /* ── Personality Chaos ── */
   [
-    ["Accidentally funny", "Laughs at everything", "Laughs at nothing"],
-    ["Calm in chaos", "Panics instantly"],
-    ["Confident for no reason", "Doubts even correct answers"],
+    ["Laughs at everything", "Laughs at nothing"],
+    ["Calm in chaos", "Panics instantly in chaos"],
+    ["Confident for no reason", "Doubt even correct answers"],
     ["Energy of 100 coffees", "Battery always at 1%"]
   ],
 
@@ -24,7 +24,7 @@ const PHRASE_LIST = [
     ["Would start drama for entertainment", "Avoids drama like a ghost"],
     ["Trustworthy… probably", "Looks guilty even when innocent"],
     ["Group's unpaid therapist", "Group's biggest problem"],
-    ["Talks non-stop", "Communicates via nods"]
+    ["Talks non-stop", "Communicates very less"]
   ],
 
   /* ── Brain & Decisions ── */
@@ -37,15 +37,15 @@ const PHRASE_LIST = [
 
   /* ── Daily Life Struggles ── */
   [
-    ["Always late but chill", "Early and judging everyone"],
-    ["Forgets why they opened the app", "Remembers things from 2012"],
-    ["Spends money like it's fake", "Acts poor with money saved"],
-    ["Replies in 0.2 seconds", "Replies after 3-5 business days"]
+    ["Always late but chill", "Everything on time and judges everyone"],
+    ["Forgets why they opened the refrigerator", "Remembers things from 2012"],
+    ["Spends money like it grow on trees", "Acts poor with money saved"],
+    ["Replies in 0.2 seconds", "Replies after 3.14 business days"]
   ],
 
   /* ── Pure Chaos ── */
   [
-    ["Laughs during serious moments", "Serious during funny moments"],
+    ["Laughs during serious moments", "Serious even in funny moments"],
     ["Trips on flat ground", "Walks like a final boss"],
     ["Prank mastermind", "Prank victim"],
     ["Embarrasses self daily", "Witnesses others' embarrassment"]
@@ -55,24 +55,24 @@ const PHRASE_LIST = [
   [
     ["Would go viral accidentally", "Tries to go viral and fails"],
     ["Future meme legend", "Doesn't understand memes"],
-    ["Chronically online", "Still uses internet like it's 2010"],
-    ["Influencer energy", "NPC in comment section"]
+    ["Chronically online", "Uses internet like it's 2010"],
+    ["Influencer energy", "NPC in comment section, 0 influence skills"]
   ],
 
   /* ── Survival Logic ── */
   [
     ["Survives by skill", "Survives by luck"],
-    ["Runs toward danger", "Hides immediately"],
-    ["Sacrifices self for team", "Uses team as shield"],
+    ["Runs toward danger", "Hides immediately in danger"],
+    ["Sacrifices self for team", "Uses team as shield for self"],
     ["Gets lost in own neighborhood", "Human GPS"]
   ],
 
-  /* ── Weird Vibes ── */
+  /* ── Vibes ── */
   [
-    ["Main character in their head", "Background extra in reality"],
+    ["Main cherector vibes", "Main character in their head", "Background extra in reality"],
     ["Looks innocent, plots chaos", "Looks dangerous, is soft"],
     ["Fake genius energy", "Silent actual genius"],
-    ["Unpredictable NPC", "Scripted dialogue person"]
+    ["Unpredictable NPC, can't be understood", "Scripted dialogue person"]
   ],
 
   /* ── Wild & Random ── */
@@ -92,6 +92,11 @@ const PHRASE_LIST = [
 
   /* ── Niche (Rare Drops) ── */
   [
+    ["Plays games for fun", "Plays games to win"],
+    ["Has 1000 hours in one game", "Has 1000 games with 1 hour each"],
+    ["Skilled up in one game", "Is a jack of all trades, master of none"],
+    ["Skill issues", "Plays like a pro, dies like a noob", "Final Boss need more skills to beat them."],
+    
     ["Says 'one more game' and plays 5 hours", "Rages but still queues again"],
     ["Blames lag for everything", "Actually is the lag"],
     ["Carries the team silently", "Needs carrying but gives advice"],
