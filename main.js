@@ -59,6 +59,16 @@ db.ref("games/Who_Fits/rooms/")
 
     for (const roomId in rooms) {
       const room = rooms[roomId];
+
+      // Skip broken rooms
+      if (!room || !room.settings) continue;
+
+      // 🧹 AUTO DELETE OLD ROOMS
+      if (room.createdAt && (now - room.createdAt > MAX_ROOM_AGE)) {
+        db.ref("games/Who_Fits/rooms/" + roomId).remove();
+        continue;
+      }
+
       const playerCount = room.players ? Object.keys(room.players).length : 0;
 
       // Resolve host display name from the players object
@@ -183,13 +193,28 @@ const document_VOTNG_TABLET = document.getElementById("voting-tablet");
 function createDivs(parentDIV, num, room) {
   parentDIV.innerHTML = '';
 
+  // Safety checks (critical for Firebase sync issues)
+  if (!room || !room.players || !room.game || !room.game.playerOrder) {
+    console.warn("createDivs: Missing room data, skipping render.");
+    return;
+  }
+
   for (let i = 0; i < num; i++) {
+    const playerId = room.game.playerOrder[i];
+    const player = room.players?.[playerId];
+
+    // Skip if player data is missing (prevents crash)
+    if (!player) {
+      console.warn(`createDivs: Missing player at index ${i}`);
+      continue;
+    }
+
     const newDiv = document.createElement("div");
 
     newDiv.id = `${parentDIV.id}-child-${i + 1}`;
 
     const newP = document.createElement("p");
-    newP.textContent = room.players[room.game.playerOrder[i]].name;
+    newP.textContent = player.name;
     newP.style.display = "inline-block";
 
     const newButton = document.createElement("button");

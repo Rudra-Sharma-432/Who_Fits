@@ -26,6 +26,7 @@ function createRoom(playerName) {
   roomRef.set({
     host: playerID,
     roomID: roomId,
+    createdAt: Date.now(),
     password: document.getElementById("room-password-input").value,
     state: "lobby",
     players: {
@@ -108,8 +109,14 @@ function listenToRoom(roomName) {
       const room = snapshot.val();
 
       // ── Auto-delete empty rooms ──
-      if (!room || !room.players || Object.keys(room.players).length === 0) {
-        db.ref("games/Who_Fits/rooms/" + roomName).remove();
+      if (!room) return;
+
+      // If players object is missing or empty
+      if (!room.players || Object.keys(room.players).length === 0) {
+        // Only host should delete (prevents race conditions)
+        if (currentPlayer === room.host) {
+          db.ref("games/Who_Fits/rooms/" + roomName).remove();
+        }
         return;
       }
 
@@ -246,7 +253,7 @@ async function showVotingResults(room) {
   renderVoteResults(room);
 
   const countdownEl = document.getElementById("results-countdown");
-  
+
   // Countdown 120 seconds
   for (let i = room.settings.eachRoundTime; i >= 0; i--) {
     await wait(1000);
