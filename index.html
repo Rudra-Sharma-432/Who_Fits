@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Fits</title>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- ───────────── MAIN MENU ───────────── -->
+      <div id="main-menu-panel" class="panel">
+        <h1>Who Fits</h1>
+        <button id="play-btn"     onclick="goToPanel('play')">Play</button>
+        <button id="settings-btn" onclick="goToPanel('settings')">Settings</button>
+        <button id="account-btn"  onclick="goToPanel('account')">Account</button>
+        <button id="about-btn"    onclick="goToPanel('about')">About</button>
+      </div>
+
+      <!-- ───────────── PLAY MENU ───────────── -->
+      <div id="play-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('main-menu')">&#8592;</button>
+        <h2>Game Menu</h2>
+        <button onclick="goToPanel('create-room')">Create A Room</button>
+        <button onclick="goToPanel('join-room')">Join A Public Room</button>
+        <input  id="password-input-for-joining" type="text"
+                style="margin-top: 20px; padding: 10px; border-radius: 5px; border: none; width: 200px;"
+                placeholder="Enter Room Code">
+        <button onclick="goToPanel('loading-room')">Join A Private Room</button>
+      </div>
+
+      <!-- ───────────── SETTINGS ───────────── -->
+      <div id="settings-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('main-menu')">&#8592;</button>
+        <div>
+          <h2>SETTINGS</h2>
+        </div>
+      </div>
+
+      <!-- ───────────── ACCOUNT ───────────── -->
+      <div id="account-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('main-menu')">&#8592;</button>
+        <div>
+          <h2>ACCOUNT</h2>
+          <p id="current-username"></p>
+          <input id="username-input" type="text" placeholder="Enter your username"
+            style="padding: 10px; border-radius: 5px; border: none; color: black; margin-top: 20px;">
+          <button onclick="setUserName()">Submit</button>
+        </div>
+      </div>
+
+      <!-- ───────────── ABOUT ───────────── -->
+      <div id="about-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('main-menu')">&#8592;</button>
+
+        <div id="about-wrapper">
+
+          <h1 id="about-title">Word Imposter</h1>
+
+          <!-- ── Game Description ── -->
+          <div class="about-card">
+            <p class="about-card-label">ABOUT THE GAME</p>
+            <p class="about-body-text">
+              <strong>Word Imposter</strong> is a <strong>social deduction party game</strong> where players try to identify the hidden Imposter among them. Everyone receives a secret word — except one player. other players should find the imposter and the<span class="highlight">Imposter</span> must blend in during the discussion and avoid being exposed.
+            </p>
+            <div class="about-badge-row">
+              <span class="about-badge">&#128101; 3–10 Players</span>
+              <span class="about-badge">&#127922; Party Game</span>
+              <span class="about-badge">&#128373; Social Deduction</span>
+            </div>
+          </div>
+
+          <!-- ── How to Play ── -->
+          <div class="about-card">
+            <p class="about-card-label">HOW TO PLAY</p>
+
+            <div class="about-step">
+              <div class="step-number">1</div>
+              <div class="about-step-body">
+                <p class="step-title">Join a Room</p>
+                <p class="about-body-text">One player creates a room and shares the Room ID with friends. Others can join from the public list or enter a room code directly.</p>
+              </div>
+            </div>
+
+            <div class="about-divider"></div>
+
+            <div class="about-step">
+              <div class="step-number">2</div>
+              <div class="about-step-body">
+                <p class="step-title">Roles Are Assigned</p>
+                <p class="about-body-text">When the game starts, every player receives the same secret word — except one. That player secretly becomes the <span class="highlight">Imposter</span> and receives no word.</p>
+              </div>
+            </div>
+
+            <div class="about-divider"></div>
+
+            <div class="about-step">
+              <div class="step-number">3</div>
+              <div class="about-step-body">
+                <p class="step-title">Discussion Round</p>
+                <p class="about-body-text">Players take turns describing the word without saying it directly to clear themselves. The Imposter must listen carefully and bluff like they know the word.</p>
+              </div>
+            </div>
+
+            <div class="about-divider"></div>
+
+            <div class="about-step">
+              <div class="step-number">4</div>
+              <div class="about-step-body">
+                <p class="step-title">Vote!</p>
+                <p class="about-body-text">After all players have spoken, everyone votes for who they think is the Imposter. If Players vote out the Imposter then players win but The Imposter survives the vote — Imposter win win!</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ── Tips ── -->
+          <div class="about-card">
+            <p class="about-card-label">&#128161; TIPS</p>
+            <div class="tip-row">
+              <span class="tip-dot"></span>
+              <p class="about-body-text">Be descriptive but don't give the word away — subtlety wins.</p>
+            </div>
+            <div class="tip-row">
+              <span class="tip-dot"></span>
+              <p class="about-body-text">Pay close attention to players who seem vague or overly generic.</p>
+            </div>
+            <div class="tip-row">
+              <span class="tip-dot"></span>
+              <p class="about-body-text">If you're the Imposter, listen to others first to pick up clues.</p>
+            </div>
+          </div>
+
+          <!-- ── Credits ── -->
+          <div class="about-card">
+            <p class="about-card-label">CREDITS</p>
+            <div class="credit-row">
+              <span class="credit-key">Creator</span>
+              <span class="credit-val">Rudra Sharma</span>
+            </div>
+            <div class="credit-row">
+              <span class="credit-key">Built With</span>
+              <span class="credit-val">HTML &bull; CSS &bull; JavaScript &bull; Firebase</span>
+            </div>
+            <div class="credit-row">
+              <span class="credit-key">Game Type</span>
+              <span class="credit-val">Social Deduction Party Game</span>
+            </div>
+            <div class="credit-row">
+              <span class="credit-key">Version</span>
+              <span class="credit-val">1.3.0</span>
+            </div>
+            <div class="credit-row">
+              <span class="credit-key">Started</span>
+              <span class="credit-val">10 March, 2026</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ───────────── CREATE ROOM ───────────── -->
+      <div id="create-room-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('play')">&#8592;</button>
+        <div>
+          <h2>CREATE ROOM</h2>
+
+          <p>Max Players : <span id="maxPlayer-val">6</span></p>
+          <input id="maxPlayer-input" type="range" min="3" max="10" value="6">
+
+          <p>Total Rounds : <span id="totalRounds-val">2</span></p>
+          <input id="totalRounds-input" type="range" min="1" max="5" value="2">
+
+          <p>Time for Voting in each Round : <span id="discussionTime-val">60</span> sec</p>
+          <!-- value="20" matches the JS default eachPlayerDiscussionTime = 20 -->
+          <input id="eachRoundTime-input" type="range" min="10" max="120" value="60">
+
+          <p>No. of vote a player can do : <span id="totalRounds-val">1</span></p>
+          <input id="maxVotes-input" type="range" min="1" max="3" value="1">
+
+          <p>Anonymous Voating : <input type="checkbox" id="anonymousVote-input"></p>
+          
+
+          <p>Type the password to make it private</p>
+          <input id="room-password-input" type="text" placeholder="Type your password">
+
+          <button onclick="createRoom(username)">Create</button>
+        </div>
+      </div>
+
+      <!-- ───────────── JOIN ROOM ───────────── -->
+      <div id="join-room-panel" class="panel hidden">
+        <button class="back-btn" onclick="goToPanel('play')">&#8592;</button>
+        <h2>JOIN ROOM</h2>
+        <!-- Room list is dynamically populated by main.js -->
+        <div id="rooms"></div>
+      </div>
+
+      <!-- ───────────── LOBBY ───────────── -->
+      <div id="lobby-panel" class="panel hidden">
+        <button class="back-btn" onclick="leaveRoom()">&#8592;</button>
+        <h2>Lobby</h2>
+        <p>You are in the lobby, wait for the game to start.</p>
+
+        <p id="lobby-room-id">room id : </p>
+        <p id="lobby-host">host : </p>
+        <p id="lobby-player-count">player count : </p>
+        <br>
+
+        <div id="lobby-player-list" style="margin-top: 5px;">
+          <p id="player1">player_1</p>
+          <p id="player2">player_2</p>
+        </div>
+
+        <p id="lobby-countdown" style="margin-top: 10px; font-weight: bold;"></p>
+        <button id="lobby-start-button" onclick="startGameByHost()">Start</button>
+      </div>
+
+      <!-- ───────────── MEETING ───────────── -->
+      <div id="meeting-panel" class="panel hidden">
+        <!-- Fullscreen overlay that shows each player their role/word for 3 seconds -->
+        <div id="show-role"
+          style="position: absolute; top: 0; width: 100%; height: 100%;
+                 display: none; flex-direction: column;
+                 justify-content: center; align-items: center; margin: 0 !important;">
+        </div>
+
+        <div id="meeting-tablet-container" class="hidden">
+          <h2>Discuss on your own turns</h2>
+          <div id="meeting-tablet"></div>
+          <p id="meeting-round">Round : 1/2</p>
+        </div>
+      </div>
+
+      <!-- ───────────── VOTING ───────────── -->
+      <div id="voting-panel" class="panel hidden">
+        <h2><u>Vote for <i><b>Who Fits</b></i></u></h2>
+        <h3 id="show-phrase"></h3>
+        <div id="voting-tablet">
+
+        </div>
+
+        <!-- Play-again controls (host sees button, others see waiting message) -->
+        <div id="play-again-container" style="margin-top: 30px; text-align: center;">
+          <button id="play-again-btn" onclick="restartGame()">&#x1F501; Play Again</button>
+          <p id="play-again-msg" class="hidden" style="color: var(--text-secondary); font-size: 0.85rem;">
+            Waiting for host to restart...
+          </p>
+        </div>
+      </div>
+
+      <!-- ───────────── VOTING RESULTS ───────────── -->
+      <div id="results-panel" class="panel hidden">
+        <h2>Voting Results</h2>
+        <div id="results-tablet">
+          <!-- Dynamically populated with vote breakdown -->
+        </div>
+        <p id="results-countdown" style="margin-top: 30px; font-weight: bold; color: var(--accent);">
+          Next round in: -- sec
+        </p>
+      </div>
+
+    </div> <!-- end of .container -->
+
+  </body>
+
+  <!-- Scripts loaded in dependency order: config → main (UI) → words (data) → game (logic) -->
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+  <script src="phrases.js"></script>
+  <script src="game.js"></script>
+
+</html>
