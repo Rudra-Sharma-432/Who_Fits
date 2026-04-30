@@ -192,7 +192,7 @@ function startGame(room) {
   });
 
   if (currentPlayer === room.host) {
-    document.getElementById("start-game-btn").classList.remove('hidden');
+    document.getElementById("play-again-btn").classList.remove('hidden');
   }
 }
 
@@ -295,6 +295,9 @@ function endGame(room) {
 
   // Prevent further progression
   gameStarted = false;
+
+  // Clear the voted state to make the play-again button clickable
+  document_VOTNG_TABLET.classList.remove('voted');
 
   // Show the voting panel (displays results from last round)
   goToPanel("voting");
