@@ -373,6 +373,9 @@ function showPlayAgainUI(room) {
   }
 }
 
+document.getElementById('play-again-btn').addEventListener('click', restartGame);
+
+
 
 /**
  * Renders the vote breakdown for each player.

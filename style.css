@@ -152,6 +152,7 @@ div {
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  text-align: center;
 }
 
 #voting-tablet {
@@ -161,8 +162,6 @@ div {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  width: 120%;
-  margin: 0 auto;
 }
 
 #voting-panel h2 {
@@ -203,7 +202,8 @@ div {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 60%;
+  width: 60vw;
+  min-width: 350px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -481,4 +481,11 @@ div {
   font-size: 0.85rem;
   color: var(--text-primary);
   text-align: right;
+}
+
+
+@media screen and (max-width: 480px) {
+  #voting-tablet {
+    grid-template-columns: none;
+  }
 }

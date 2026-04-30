@@ -140,9 +140,14 @@ function listenToRoom(roomName) {
         showRoundVoting(room);
       }
 
-      // ── Host checks if all players voted and progresses to next round ──
-      if (room.state === "playing" && currentPlayer === room.host && gameJoined) {
-        handleVotingPhase(room);
+      // ── All players show voting results when voting is complete ──
+      if (room.state === "playing" && room.votes && gameJoined) {
+        const votes = room.votes || {};
+        const playerIds = Object.keys(room.players);
+        if (Object.keys(votes).length === playerIds.length && room.game.round > lastResultsRound) {
+          lastResultsRound = room.game.round;
+          showVotingResults(room);
+        }
       }
 
       // ── All players show end screen when game ends ──
@@ -185,6 +190,10 @@ function startGame(room) {
       playerOrder: players
     }
   });
+
+  if (currentPlayer === room.host) {
+    document.getElementById("start-game-btn").classList.remove('hidden');
+  }
 }
 
 
@@ -219,34 +228,17 @@ async function showRoundVoting(room) {
   document_SHOW_ROLE_DIV.style.display = "none";
 
   // ── Show voting panel ──
+  document.getElementById('show-phrase').innerText = `Phrase: ${room.game.word}`;
   createDivs(document_VOTNG_TABLET, playerCount, room);
   goToPanel("voting");
 }
 
 
-// ═══════════════════════════════════════════════════════
-//  VOTING PHASE  (host only)
-// ═══════════════════════════════════════════════════════
 
-/**
- * Called by host listener; checks if all players have voted.
- * If yes, shows results for 120 seconds then progresses to next round or ends the game.
- */
-function handleVotingPhase(room) {
-
-  const votes = room.votes || {};
-  const playerIds = Object.keys(room.players);
-
-  // All players have voted and we haven't shown results for this round yet
-  if (Object.keys(votes).length === playerIds.length && room.game.round > lastResultsRound) {
-    lastResultsRound = room.game.round;
-    showVotingResults(room);
-  }
-}
 
 
 /**
- * Displays voting results for 120 seconds, then auto-progresses.
+ * Displays voting results for 120 seconds, then auto-progresses (host only).
  */
 async function showVotingResults(room) {
 
@@ -261,11 +253,13 @@ async function showVotingResults(room) {
     countdownEl.innerText = `Next round in: ${i} sec`;
   }
 
-  // After 120 seconds, progress to next round or end game
-  if (room.game.round < room.settings.maxRounds) {
-    progressToNextRound(room);
-  } else {
-    db.ref("games/Who_Fits/rooms/" + currentRoom).update({ state: "ended" });
+  // Only host progresses to next round or ends game
+  if (currentPlayer === room.host) {
+    if (room.game.round < room.settings.maxRounds) {
+      progressToNextRound(room);
+    } else {
+      db.ref("games/Who_Fits/rooms/" + currentRoom).update({ state: "ended" });
+    }
   }
 }
 
