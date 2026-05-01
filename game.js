@@ -17,6 +17,13 @@ let currentPlayer = null;
 /** Creates a new room in Firebase and immediately joins it as host. */
 function createRoom(playerName) {
 
+  // Safeguard: ensure UID is defined before proceeding
+  if (!UID || UID === undefined || UID === null) {
+    UID = "player_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+    localStorage.setItem("uid", UID);
+    console.warn("UID was undefined. Generated new UID:", UID);
+  }
+
   const roomId = Math.floor(Math.random() * 10000);
   const roomName = "room_" + roomId;
   const playerID = UID;
@@ -26,7 +33,6 @@ function createRoom(playerName) {
   roomRef.set({
     host: playerID,
     roomID: roomId,
-    createdAt: Date.now(),
     password: document.getElementById("room-password-input").value,
     state: "lobby",
     players: {
@@ -38,7 +44,7 @@ function createRoom(playerName) {
     settings: {
       maxPlayers: maxPlayers,
       maxRounds: totalRounds,
-      eachRoundTime: eachRoundTime,
+      resultTimer: resultTimer,
       maxVotesPerPlayer: maxVotesPerPlayer,
       anonymousVoting: anonymousVote
     },
@@ -57,6 +63,12 @@ function joinRoom(roomName, playerId) {
 
   // If no playerId was supplied this is a regular (non-host) join
   if (!playerId) {
+    // Safeguard: ensure UID is defined
+    if (!UID || UID === undefined || UID === null) {
+      UID = "player_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+      localStorage.setItem("uid", UID);
+      console.warn("UID was undefined in joinRoom. Generated new UID:", UID);
+    }
     playerId = UID;
     const playerRef = db.ref("games/Who_Fits/rooms/" + roomName + "/players/" + playerId);
     playerRef.set({ name: username });
@@ -254,8 +266,9 @@ async function showVotingResults(room) {
 
   const countdownEl = document.getElementById("results-countdown");
 
-  // Countdown 120 seconds
-  for (let i = room.settings.eachRoundTime; i >= 0; i--) {
+  // Countdown - use resultTimer if available, fall back to eachRoundTime for old rooms
+  const timerDuration = room.settings.resultTimer || room.settings.eachRoundTime;
+  for (let i = timerDuration; i >= 0; i--) {
     await wait(1000);
     countdownEl.innerText = `Next round in: ${i} sec`;
   }

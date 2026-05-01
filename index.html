@@ -20,10 +20,10 @@
       <!-- ───────────── MAIN MENU ───────────── -->
       <div id="main-menu-panel" class="panel">
         <h1>Who Fits</h1>
-        <button id="play-btn"     onclick="goToPanel('play')">Play</button>
+        <button id="play-btn" onclick="goToPanel('play')">Play</button>
         <button id="settings-btn" onclick="goToPanel('settings')">Settings</button>
-        <button id="account-btn"  onclick="goToPanel('account')">Account</button>
-        <button id="about-btn"    onclick="goToPanel('about')">About</button>
+        <button id="account-btn" onclick="goToPanel('account')">Account</button>
+        <button id="about-btn" onclick="goToPanel('about')">About</button>
       </div>
 
       <!-- ───────────── PLAY MENU ───────────── -->
@@ -32,9 +32,9 @@
         <h2>Game Menu</h2>
         <button onclick="goToPanel('create-room')">Create A Room</button>
         <button onclick="goToPanel('join-room')">Join A Public Room</button>
-        <input  id="password-input-for-joining" type="text"
-                style="margin-top: 20px; padding: 10px; border-radius: 5px; border: none; width: 200px;"
-                placeholder="Enter Room Code">
+        <input id="password-input-for-joining" type="text"
+          style="margin-top: 20px; padding: 10px; border-radius: 5px; border: none; width: 200px;"
+          placeholder="Enter Room Code">
         <button onclick="goToPanel('loading-room')">Join A Private Room</button>
       </div>
 
@@ -64,18 +64,20 @@
 
         <div id="about-wrapper">
 
-          <h1 id="about-title">Word Imposter</h1>
+          <h1 id="about-title">Who Fits</h1>
 
           <!-- ── Game Description ── -->
           <div class="about-card">
             <p class="about-card-label">ABOUT THE GAME</p>
             <p class="about-body-text">
-              <strong>Word Imposter</strong> is a <strong>social deduction party game</strong> where players try to identify the hidden Imposter among them. Everyone receives a secret word — except one player. other players should find the imposter and the<span class="highlight">Imposter</span> must blend in during the discussion and avoid being exposed.
+              <strong>Who Fits</strong> is a <strong>social party game</strong> where players vote for who they think
+              best matches a given phrase. There are no right or wrong answers — the fun comes from how your friends see
+              each other and reacting to the results together.
             </p>
             <div class="about-badge-row">
-              <span class="about-badge">&#128101; 3–10 Players</span>
+              <span class="about-badge">&#128101; 2–10 Players</span>
               <span class="about-badge">&#127922; Party Game</span>
-              <span class="about-badge">&#128373; Social Deduction</span>
+              <span class="about-badge">&#128514; Social &amp; Chaotic</span>
             </div>
           </div>
 
@@ -87,7 +89,8 @@
               <div class="step-number">1</div>
               <div class="about-step-body">
                 <p class="step-title">Join a Room</p>
-                <p class="about-body-text">One player creates a room and shares the Room ID with friends. Others can join from the public list or enter a room code directly.</p>
+                <p class="about-body-text">One player creates a room and shares the Room ID with friends. Others can
+                  join from the public list or enter a room code directly.</p>
               </div>
             </div>
 
@@ -96,8 +99,10 @@
             <div class="about-step">
               <div class="step-number">2</div>
               <div class="about-step-body">
-                <p class="step-title">Roles Are Assigned</p>
-                <p class="about-body-text">When the game starts, every player receives the same secret word — except one. That player secretly becomes the <span class="highlight">Imposter</span> and receives no word.</p>
+                <p class="step-title">A Phrase Appears</p>
+                <p class="about-body-text">Every round, a prompt is shown to all players — something like <span
+                    class="highlight">"Most likely to survive a zombie apocalypse"</span> or <span
+                    class="highlight">"Talks non-stop"</span>.</p>
               </div>
             </div>
 
@@ -106,8 +111,9 @@
             <div class="about-step">
               <div class="step-number">3</div>
               <div class="about-step-body">
-                <p class="step-title">Discussion Round</p>
-                <p class="about-body-text">Players take turns describing the word without saying it directly to clear themselves. The Imposter must listen carefully and bluff like they know the word.</p>
+                <p class="step-title">Vote!</p>
+                <p class="about-body-text">Vote for the player you think fits the phrase best. You can vote for
+                  yourself. The host controls how many votes each player gets per round.</p>
               </div>
             </div>
 
@@ -116,8 +122,9 @@
             <div class="about-step">
               <div class="step-number">4</div>
               <div class="about-step-body">
-                <p class="step-title">Vote!</p>
-                <p class="about-body-text">After all players have spoken, everyone votes for who they think is the Imposter. If Players vote out the Imposter then players win but The Imposter survives the vote — Imposter win win!</p>
+                <p class="step-title">See the Results</p>
+                <p class="about-body-text">After everyone votes, the results are revealed — showing who got how many
+                  votes and exactly who voted for whom (unless anonymous mode is on). React, laugh, and discuss!</p>
               </div>
             </div>
 
@@ -128,15 +135,15 @@
             <p class="about-card-label">&#128161; TIPS</p>
             <div class="tip-row">
               <span class="tip-dot"></span>
-              <p class="about-body-text">Be descriptive but don't give the word away — subtlety wins.</p>
+              <p class="about-body-text">Play on voice chat — reactions during the reveal are the best part.</p>
             </div>
             <div class="tip-row">
               <span class="tip-dot"></span>
-              <p class="about-body-text">Pay close attention to players who seem vague or overly generic.</p>
+              <p class="about-body-text">There are no right answers, so vote honestly — it's more fun that way.</p>
             </div>
             <div class="tip-row">
               <span class="tip-dot"></span>
-              <p class="about-body-text">If you're the Imposter, listen to others first to pick up clues.</p>
+              <p class="about-body-text">Turn on anonymous mode if you want chaos — no one knows who voted for whom!</p>
             </div>
           </div>
 
@@ -153,15 +160,15 @@
             </div>
             <div class="credit-row">
               <span class="credit-key">Game Type</span>
-              <span class="credit-val">Social Deduction Party Game</span>
+              <span class="credit-val">Social Party Game</span>
             </div>
             <div class="credit-row">
               <span class="credit-key">Version</span>
-              <span class="credit-val">1.3.0</span>
+              <span class="credit-val">1.0.0</span>
             </div>
             <div class="credit-row">
               <span class="credit-key">Started</span>
-              <span class="credit-val">10 March, 2026</span>
+              <span class="credit-val">30 April, 2026</span>
             </div>
           </div>
 
@@ -184,11 +191,11 @@
           <!-- value="20" matches the JS default eachPlayerDiscussionTime = 20 -->
           <input id="eachRoundTime-input" type="range" min="10" max="120" value="60">
 
-          <p>No. of vote a player can do : <span id="totalRounds-val">1</span></p>
+          <p>No. of vote a player can do : <span id="maxVotes-val">1</span></p>
           <input id="maxVotes-input" type="range" min="1" max="3" value="1">
 
-          <p>Anonymous Voating : <input type="checkbox" id="anonymousVote-input"></p>
-          
+          <p>Anonymous Voting : <input type="checkbox" id="anonymousVote-input"></p>
+
 
           <p>Type the password to make it private</p>
           <input id="room-password-input" type="text" placeholder="Type your password">
@@ -211,9 +218,15 @@
         <h2>Lobby</h2>
         <p>You are in the lobby, wait for the game to start.</p>
 
-        <p id="lobby-room-id">room id : </p>
-        <p id="lobby-host">host : </p>
-        <p id="lobby-player-count">player count : </p>
+        <div id="lobby-info-div">
+          <p id="lobby-room-id">Room ID : --</p>
+          <p id="lobby-host">Host : -----</p>
+          <p id="lobby-player-count">Player Count : --/--</p>
+          <p id="lobby-total-rounds">Total Rounds : --</p>
+          <p id="lobby-result-timer">Result Timer : -- sec</p>
+          <p id="lobby-vote-per-player">Vote Per Player : -</p>
+          <p id="lobby-anonymous-voteing">Anonymous Vote : ---</p>
+        </div>
         <br>
 
         <div id="lobby-player-list" style="margin-top: 5px;">
@@ -228,8 +241,7 @@
       <!-- ───────────── MEETING ───────────── -->
       <div id="meeting-panel" class="panel hidden">
         <!-- Fullscreen overlay that shows each player their role/word for 3 seconds -->
-        <div id="show-role"
-          style="position: absolute; top: 0; width: 100%; height: 100%;
+        <div id="show-role" style="position: absolute; top: 0; width: 100%; height: 100%;
                  display: none; flex-direction: column;
                  justify-content: center; align-items: center; margin: 0 !important;">
         </div>
@@ -281,4 +293,5 @@
 
 
   <!-- started on 30 April, 2026 -->
+
 </html>

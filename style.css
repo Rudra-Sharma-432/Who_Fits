@@ -37,11 +37,13 @@ button {
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  transition: transform 0.12s ease;
 }
 
 button:hover {
   border-radius: 13px;
   background-color: var(--accent-hover);
+  transform: scale(1.06);
 }
 
 button:active {
@@ -73,7 +75,7 @@ div {
   font-size: 22px;
   line-height: 1;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 50% !important;
   border: none;
   cursor: pointer;
   height: 40px;
@@ -88,7 +90,6 @@ div {
 
 .back-btn:hover {
   background-color: var(--border) !important;
-  border-radius: 50%;
 }
 
 /* ── Room List (Join Room panel) ── */
@@ -135,7 +136,7 @@ div {
 }
 
 #main-menu-panel button:hover {
-  width: 150px;
+  /* width: 150px; */
 }
 
 /* ── Play Panel Button Widths ── */
@@ -144,7 +145,38 @@ div {
 }
 
 #play-panel button:hover {
-  width: 220px;
+  /* width: 220px; */
+}
+
+
+/* ── Lobby ── */
+#lobby-info-div {
+  min-width: 100px;
+  background-color: #1f1f1f;
+  padding: 15px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+#lobby-player-list {
+  min-width: 280px;
+  background-color: var(--border);
+  padding: 20px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#lobby-player-list p {
+  font-size: 18px;
+  display: inline;
+  background-color: #323232;
+  padding: 8px;
+  border-radius: 10px;
 }
 
 /* ── Voting Panel ── */
@@ -176,11 +208,11 @@ div {
   border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
+  border-radius: 11px;
 }
 
 .vote-btn:hover {
   background-color: var(--accent-hover);
-  border-radius: 11px;
 }
 
 #voting-tablet.voted .vote-btn {

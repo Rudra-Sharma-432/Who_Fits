@@ -63,12 +63,6 @@ db.ref("games/Who_Fits/rooms/")
       // Skip broken rooms
       if (!room || !room.settings) continue;
 
-      // 🧹 AUTO DELETE OLD ROOMS
-      if (room.createdAt && (now - room.createdAt > MAX_ROOM_AGE)) {
-        db.ref("games/Who_Fits/rooms/" + roomId).remove();
-        continue;
-      }
-
       const playerCount = room.players ? Object.keys(room.players).length : 0;
 
       // Resolve host display name from the players object
@@ -101,6 +95,11 @@ const document_LOBBY_PANEL = document.getElementById("lobby-panel");
 const document_LOBBY_ROOM_ID = document.getElementById("lobby-room-id");
 const document_LOBBY_HOST = document.getElementById("lobby-host");
 const document_LOBBY_PLAYER_COUNT = document.getElementById("lobby-player-count");
+const document_LOBBY_ANONYMOUS_VOTE = document.getElementById("lobby-anonymous-voteing");
+const document_LOBBY_RESULT_TIMER = document.getElementById("lobby-result-timer");
+const document_LOBBY_TOTAL_ROUNDS = document.getElementById("lobby-total-rounds");
+const document_LOBBY_VOTE_PER_PLAYER = document.getElementById("lobby-vote-per-player");
+
 const document_LOBBY_PLAYER_LIST = document.getElementById("lobby-player-list");
 const document_LOBBY_START_BUTTON = document.getElementById("lobby-start-button");
 const document_SHOW_ROLE_DIV = document.getElementById("show-role");
@@ -109,10 +108,17 @@ const document_SHOW_ROLE_DIV = document.getElementById("show-role");
 /** Re-renders all lobby info whenever the room snapshot updates. */
 function updatePlayersUI(room) {
 
-  document_LOBBY_ROOM_ID.innerText = "room id : " + room.roomID;
-  document_LOBBY_HOST.innerText = "host : " + room.players[room.host].name;
-  document_LOBBY_PLAYER_COUNT.innerText = "player count : " +
+  document_LOBBY_ROOM_ID.innerText = "Room ID : " + room.roomID;
+  document_LOBBY_HOST.innerText = "Host : " + room.players[room.host].name;
+  document_LOBBY_PLAYER_COUNT.innerText = "Player Count : " +
     Object.keys(room.players).length + "/" + room.settings.maxPlayers;
+  document_LOBBY_ANONYMOUS_VOTE.innerText = `Anonymous Vote : ${room.settings.anonymousVoting}`;
+  const resultTimerValue = room.settings.resultTimer || room.settings.eachRoundTime;
+  document_LOBBY_RESULT_TIMER.innerText = `Result Timer : ${resultTimerValue} sec`;
+  document_LOBBY_TOTAL_ROUNDS.innerText = `Total Rounds : ${room.settings.maxRounds}`;
+  document_LOBBY_VOTE_PER_PLAYER.innerText = `Vote Per Player : ${room.settings.maxVotesPerPlayer}`;
+
+
 
   // Only the host sees the Start button
   if (currentPlayer === room.host) {
@@ -265,7 +271,7 @@ async function playerTurn(i, room, round) {
   document_MEETING_ROUND.innerText = `Round : ${round}/${room.settings.maxRounds}`;
 
   const div = document.getElementById(`meeting-tablet-child-${i + 1}`);
-  const timer = room.settings.eachRoundTime;
+  const timer = room.settings.resultTimer || room.settings.eachRoundTime;
 
   // Highlight the active player's card
   div.style.backgroundColor = "var(--accent)";
@@ -322,7 +328,7 @@ function setUserName() {
 // Default values (must match the HTML range input defaults in index.html)
 var maxPlayers = 6;
 var totalRounds = 2;
-var eachRoundTime = 60;
+var resultTimer = 60;
 var maxVotesPerPlayer = 1;
 var anonymousVote = false;
 
@@ -337,13 +343,13 @@ document.getElementById('totalRounds-input').addEventListener('input', function 
 });
 
 document.getElementById('eachRoundTime-input').addEventListener('input', function () {
-  eachRoundTime = parseInt(this.value);
-  document.getElementById('discussionTime-val').textContent = eachRoundTime;
+  resultTimer = parseInt(this.value);
+  document.getElementById('discussionTime-val').textContent = resultTimer;
 });
 
 document.getElementById('maxVotes-input').addEventListener('input', function () {
   maxVotesPerPlayer = parseInt(this.value);
-  document.getElementById('maxVotes-input').textContent = maxVotesPerPlayer;
+  document.getElementById('maxVotes-val').textContent = maxVotesPerPlayer;
 });
 
 document.getElementById('anonymousVote-input').addEventListener('change', () => {
